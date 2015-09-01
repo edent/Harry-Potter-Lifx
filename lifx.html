@@ -1,0 +1,57 @@
+<html>
+<head>
+<script type="text/javascript">
+var lumos = ["Lou Moss", "lumos", "lumiss", "Loomis", "luma", "loom"];
+var knox  = ["nots", "knox","knots","knocks", "Knox", "knock", "not"];
+
+// new instance of speech recognition
+var recognition = new webkitSpeechRecognition();
+recognition.lang = "en-GB";
+
+// set params
+recognition.continuous = true;
+recognition.interimResults = true;
+recognition.start();
+
+recognition.onresult = function(event){
+  
+  // delve into words detected results & get the latest
+  // total results detected
+  var resultsLength = event.results.length -1 ;
+  // get length of latest results
+  var ArrayLength = event.results[resultsLength].length -1;
+  // get last word detected
+  var saidWord = event.results[resultsLength][ArrayLength].transcript;
+  saidWord = saidWord.trim();
+
+  console.log(saidWord);
+  xmlhttp=new XMLHttpRequest();
+
+  if (lumos.indexOf(saidWord) >= 0)
+  {
+      console.log("sending on!");
+      
+      xmlhttp.open("GET","lifx.php?state=on",true);
+      xmlhttp.send();
+  }
+
+  if (knox.indexOf(saidWord) >= 0)
+  {
+      console.log("sending off!");
+
+      xmlhttp.open("GET","lifx.php?state=off",true);
+      xmlhttp.send();
+  }
+}
+
+// speech error handling
+recognition.onerror = function(event){
+  console.log('error?');
+  console.log(event);
+}
+</script>
+</head>
+<body>
+<h2>Magic Light Bulb</h2>
+</body>
+</html>
