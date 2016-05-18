@@ -3,6 +3,14 @@
 <script type="text/javascript">
 var lumos = ["Lou Moss", "lumos", "lumiss", "Loomis", "luma", "loom"];
 var knox  = ["nots", "knox","knots","knocks", "Knox", "knock", "not"];
+var red  = ["red", "read","ret"];
+var yellow  = ["yellow", "yell", "yeah"];
+var pink  = ["pink", "ping", "pig"];
+var green  = ["green", "great","greet", "free"];
+var purple  = ["purple"];
+var orange  = ["orange", "oran"];
+var blue  = ["blue", "blew"];
+var rainbow  = ["rain", "rainbow"];
 
 // new instance of speech recognition
 var recognition = new webkitSpeechRecognition();
@@ -14,7 +22,7 @@ recognition.interimResults = true;
 recognition.start();
 
 recognition.onresult = function(event){
-  
+
   // delve into words detected results & get the latest
   // total results detected
   var resultsLength = event.results.length -1 ;
@@ -30,7 +38,7 @@ recognition.onresult = function(event){
   if (lumos.indexOf(saidWord) >= 0)
   {
       console.log("sending on!");
-      
+
       xmlhttp.open("GET","lifx.php?state=on",true);
       xmlhttp.send();
   }
@@ -41,6 +49,55 @@ recognition.onresult = function(event){
 
       xmlhttp.open("GET","lifx.php?state=off",true);
       xmlhttp.send();
+  }
+
+  if (red.indexOf(saidWord) >= 0)
+  {
+      console.log("sending red!");
+      xmlhttp.open("GET","lifx.php?colour=red",true);
+      xmlhttp.send();
+  }
+  if (yellow.indexOf(saidWord) >= 0)
+  {
+     console.log("sending yellow!");
+     xmlhttp.open("GET","lifx.php?colour=yellow",true);
+     xmlhttp.send();
+  }
+  if (pink.indexOf(saidWord) >= 0)
+  {
+      console.log("sending pink!");
+      xmlhttp.open("GET","lifx.php?colour=pink",true);
+      xmlhttp.send();
+  }
+  if (green.indexOf(saidWord) >= 0)
+  {
+     console.log("sending green!");
+     xmlhttp.open("GET","lifx.php?colour=green",true);
+     xmlhttp.send();
+  }
+  if (purple.indexOf(saidWord) >= 0)
+  {
+      console.log("sending purple!");
+      xmlhttp.open("GET","lifx.php?colour=purple",true);
+      xmlhttp.send();
+  }
+  if (orange.indexOf(saidWord) >= 0)
+  {
+     console.log("sending orange!");
+     xmlhttp.open("GET","lifx.php?colour=orange",true);
+     xmlhttp.send();
+  }
+  if (blue.indexOf(saidWord) >= 0)
+  {
+      console.log("sending blue!");
+      xmlhttp.open("GET","lifx.php?colour=blue",true);
+      xmlhttp.send();
+  }
+  if (rainbow.indexOf(saidWord) >= 0)
+  {
+     console.log("sending rainbow!");
+     xmlhttp.open("GET","lifx.php?colour=rainbow",true);
+     xmlhttp.send();
   }
 }
 
